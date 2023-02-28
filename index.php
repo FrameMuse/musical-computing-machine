@@ -1,3 +1,8 @@
+<?php
+$data = json_decode(file_get_contents("data.json"));
+?>
+
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -14,39 +19,38 @@
     <main>
       <div class="match">
         <div class="match__header">
-          <h1>Дата матча: <em>16 февраля</em></h1>
+          <h1>Дата матча: <em><?=$data->matchDate?></em></h1>
           <div class="text-box">
-            <h2>Инсайдерский прогноз:</h2>
-            <p>Из-за проблем таких-то, таких-то, прогнозируем ничью в этом матче</p>
+            <h2><?=$data->blockTitle?>:</h2>
+            <p><?=$data->blockDesc?></p>
           </div>
         </div>
         <div class="match__teams">
           <div class="match-team">
             <div class="match-team-image">
-              <img src="fcb.png" alt="FCB" class="match-team-image__shadow">
+              <img src="<?=$data->team1Image?>" alt="club" class="match-team-image__shadow">
               <div class="match-team-image__circle"></div>
-              <img src="fcb.png" alt="FCB" class="match-team-image__image">
+              <img src="<?=$data->team1Image?>" alt="club" class="match-team-image__image">
             </div>
-            <div class="match-team__number">1,75</div>
+            <div class="match-team__number"><?=$data->team1Coef?></div>
             <div class="match-team__text">Коэффициент</div>
           </div>
           <div class="match__versus">VS</div>
           <div class="match-team">
             <div class="match-team-image">
-              <img src="manchester.png" alt="Manchester" class="match-team-image__shadow">
+              <img src="<?=$data->team2Image?>" alt="Manchester" class="match-team-image__shadow">
               <div class="match-team-image__circle"></div>
-              <img src="manchester.png" alt="Manchester" class="match-team-image__image">
+              <img src="<?=$data->team2Image?>" alt="Manchester" class="match-team-image__image">
             </div>
-            <div class="match-team__number">4,5</div>
+            <div class="match-team__number"><?=$data->team2Coef?></div>
             <div class="match-team__text">Коэффициент</div>
           </div>
         </div>
         <div class="match__footer">
-          <p>При пополнении от 500 рублей, зачислим бонус 1000 фрибетов на ваш счет. Увеличь свой выигрыш и забери
-            удобным способом!</p>
+          <p><?=$data->extraInfo?></p>
           <div class="buttons">
-            <button class="button">Поставить на победителя</button>
-            <button class="button button--outline">Забрать бонус</button>
+            <button class="button"><?=$data->button1Text?></button>
+            <button class="button button--outline"><?=$data->button2Text?></button>
           </div>
         </div>
       </div>

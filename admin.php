@@ -1,3 +1,36 @@
+<?php
+ini_set("session.cookie_secure", 1);
+session_start();
+
+CheckAuth();
+UpdateData();
+
+function CheckAuth() {
+  if ($_POST["password"]) {
+    setcookie("password", $_POST["password"]);
+  }
+  
+  
+  // Check to be logged in.
+  $password = isset($_POST["password"]) ? $_POST["password"] : $_COOKIE["password"];
+  if ($password !== "1239123h1edaDOI!JHD)@N!YBOD!@ND1k28") {
+    echo "<form method=\"post\"><input name=\"password\"></form>";
+    exit();
+  }
+}
+
+function UpdateData() {
+  if (isset($_POST["submit"])) {
+    file_put_contents("data.json", json_encode($_POST, JSON_UNESCAPED_UNICODE));
+  }
+}
+
+?>
+
+<?php
+$data = json_decode(file_get_contents("data.json"));
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,21 +45,21 @@
 
   <body>
     <main>
-      <form class="form">
+      <form class="form" method="post">
         <div class="form__group">
           <label class="input">
             <span>Дата матча</span>
-            <input type="text" placeholder="16 февраля">
+            <input name="matchDate" value="<?=$data->matchDate?>" placeholder="16 февраля">
           </label>
         </div>
         <div class="form__group">
           <label class="input">
             <span>Название блока</span>
-            <input type="text" placeholder="Инсайдерский прогноз">
+            <input name="blockTitle" value="<?=$data->blockTitle?>" placeholder="Инсайдерский прогноз">
           </label>
           <label class="input">
             <span>Описание блока</span>
-            <textarea>Из-за проблем таких-то, таких-то, прогнозируем ничью в этом матче</textarea>
+            <textarea name="blockDesc"><?=$data->blockDesc?></textarea>
           </label>
         </div>
         <div class="form__group">
@@ -34,42 +67,42 @@
           <div class="form__group">
             <label class="input">
               <span>Картинка</span>
-              <input type="text" placeholder="https://google.com/fcb.png">
+              <input name="team1Image" value="<?=$data->team1Image?>" placeholder="https://google.com/fcb.png">
             </label>
             <label class="input">
               <span>Коэффициент</span>
-              <input type="text" placeholder="1,75">
+              <input name="team1Coef" value="<?=$data->team1Coef?>" placeholder="1,75">
             </label>
           </div>
           <h2>Комманда 2</h2>
           <div class="form__group">
             <label class="input">
               <span>Картинка</span>
-              <input type="text" placeholder="https://google.com/fcb.png">
+              <input name="team2Image" value="<?=$data->team2Image?>" placeholder="https://google.com/fcb.png">
             </label>
             <label class="input">
               <span>Коэффициент</span>
-              <input type="text" placeholder="1,75">
+              <input name="team2Coef" value="<?=$data->team2Coef?>" placeholder="1,75">
             </label>
           </div>
         </div>
         <div class="form__group">
           <label class="input">
             <span>Дополнительная информация</span>
-            <textarea>При пополнении от 500 рублей, зачислим бонус 1000 фрибетов на ваш счет. Увеличь свой выигрыш и забери удобным способом!</textarea>
+            <textarea name="extraInfo"><?=$data->extraInfo?></textarea>
           </label>
         </div>
         <div class="form__group">
           <label class="input">
             <span>Кнпока 1</span>
-            <input type="text" placeholder="Поставить на победителя">
+            <input name="button1Text" value="<?=$data->button1Text?>" placeholder="Поставить на победителя">
           </label>
           <label class="input">
             <span>Кнпока 2</span>
-            <input type="text" placeholder="Забрать бонус">
+            <input name="button2Text" value="<?=$data->button2Text?>" placeholder="Забрать бонус">
           </label>
         </div>
-        <button class="form__submit">Сохранить</button>
+        <button class="form__submit" name="submit" type="submit">Сохранить</button>
       </form>
     </main>
   </body>
