@@ -102,6 +102,22 @@ $data = json_decode(file_get_contents("data.json"));
             <input name="button2Text" value="<?=$data->button2Text?>" placeholder="Забрать бонус">
           </label>
         </div>
+      <div class="form__group">
+          <label class="input">
+            <span>Дополнительная информация</span>
+            <textarea name="extraInfo"><?=$data->extraInfo?></textarea>
+          </label>
+        </div>
+        <div class="form__group">
+          <label class="input">
+            <span>Кнпока 1 Ссылка</span>
+            <input name="button1Url" value="<?=$data->button1Url?>" placeholder="Поставить на победителя">
+          </label>
+          <label class="input">
+            <span>Кнпока 2 Ссылка</span>
+            <input name="button2Url" value="<?=$data->button2Url?>" placeholder="Забрать бонус">
+          </label>
+        </div>
         <button class="form__submit" name="submit" type="submit">Сохранить</button>
       </form>
     </main>

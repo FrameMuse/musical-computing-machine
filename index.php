@@ -49,8 +49,8 @@ $data = json_decode(file_get_contents("data.json"));
         <div class="match__footer">
           <p><?=$data->extraInfo?></p>
           <div class="buttons">
-            <button class="button"><?=$data->button1Text?></button>
-            <button class="button button--outline"><?=$data->button2Text?></button>
+            <button class="button" onclick="window.location.href='<?=$data->button1Url?>'" ><?=$data->button1Text?></button>
+            <button onclick="window.location.href='<?=$data->button2Url?>'" class="button button--outline"><?=$data->button2Text?></button>
           </div>
         </div>
       </div>
