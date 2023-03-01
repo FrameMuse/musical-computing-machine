@@ -203,6 +203,10 @@ p {
 
 
 @media screen and (max-width: 900px) {
+  body {
+    background: #0f0f0f;
+  }
+
   .match {
     padding: 4vw;
   }
